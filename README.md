@@ -1,3 +1,2 @@
-# PbFeb
-proba
-Programming Basics
+Programming Basics on SoftUni
+First steps
