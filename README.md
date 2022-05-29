@@ -1,2 +1,2 @@
-Programming Basics on SoftUni
+Programming Basics and Fundamental Module on SoftUni
 
