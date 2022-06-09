@@ -1,37 +1,34 @@
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class demo {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        int people = Integer.parseInt(scanner.nextLine());
+        int[] lift = Arrays.stream(scanner.nextLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
 
-        int n = Integer.parseInt(scanner.nextLine());
-
-        for (int i = 1; i <= n; i++) {
-            double num1 = Double.parseDouble(scanner.next());
-            double num2 = Double.parseDouble(scanner.next());
-
-            int sum = 0;
-            if (num1 > num2) {
-                double numFirst = Math.abs(num1);
-                while (numFirst > 0) {
-                    sum += (numFirst % 10);
-                    numFirst /= 10;
-                }
-            } else {
-                double numSecond = Math.abs(num2);
-                while (numSecond > 0) {
-                    sum += (numSecond % 10);
-                    numSecond /= 10;
+        for (int i = 0; i < lift.length; i++) {
+            if ((lift[i] < 4)) {
+                if (people >= 4 - lift[i]) {
+                    people -= 4 - lift[i];
+                    lift[i] = 4;
+                } else {
+                    lift[i] += people;
+                    people = 0;
                 }
             }
-            System.out.println(Math.abs(sum));
         }
-
-
-
-
-
+        boolean full = IntStream.range(0, lift.length).noneMatch(i -> lift[i] != 4);
+        if (people == 0 && !full) {
+            System.out.println("The lift has empty spots!");
+        } else if (people > 0 && full) {
+            System.out.printf("There isn't enough space! %d people in a queue!%n", people);
+        }
+        System.out.print(Arrays.toString(lift).replaceAll("[\\[\\]]", "")
+                .replaceAll(", ", " "));
+    }
 
     }
-}
+

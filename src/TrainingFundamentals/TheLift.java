@@ -28,15 +28,13 @@ public class TheLift {
         if (leftPeople == 0){
             System.out.println("The lift has empty spots!");
             System.out.print(wagons + " ");
-        }
-        if (leftPeople > 0){
+        } else if (leftPeople > 0){
             System.out.printf("There isn't enough space! %d people in a queue!%n", leftPeople);
             System.out.print(wagons + " ");
-        }
-        if (leftPeople == 0){
+        }else{
             System.out.print(wagons + " ");
         }
-        System.out.println();
+
 
     }
 }
