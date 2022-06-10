@@ -17,10 +17,15 @@ public class TheLift {
 
         for (int currentWagon : wagons) {
             if (currentWagon == 0) {
-                countPeople = 4;
-                leftPeople -= 4;
-            }else {
                 countPeople = 4 - currentWagon;
+                leftPeople -= countPeople;
+                if (leftPeople < 4 && leftPeople > 0){
+                    currentWagon = leftPeople;
+                    leftPeople -= leftPeople;
+                    break;
+                }
+            }else {
+                countPeople += 4 - currentWagon;
                 leftPeople -= countPeople;
             }
 
