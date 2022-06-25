@@ -8,42 +8,53 @@ public class demo {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        List<String> list = Arrays.stream(scanner.nextLine().split("!"))
-                .collect(Collectors.toList());
-        String commands = scanner.nextLine();
+        List<Integer> houses = Arrays.stream(scanner.nextLine().split("@")).
+                map(Integer::parseInt).collect(Collectors.toList());
 
-        while (!commands.equals("Go Shopping!")) {
-            String[] tokens = commands.split(" ");
-            String command = tokens[0];
-            String item = tokens[1];
-            switch (command) {
-                case "Urgent":
-                    if (!list.contains(item)){
-                        list.add(0, item);
+        String command = scanner.nextLine();
+
+        int jump = 0;
+        int count = 0;
+        while (!command.equals("Love!")) {
+            String[] operations = command.split(" ");
+
+            switch (operations[0]) {
+                case "Jump":
+                    int len = Integer.parseInt(operations[1]);
+                    jump += len;
+
+                    if (jump >= houses.size()) {
+                        jump = 0;
+
                     }
-                    break;
-                case "Unnecessary":
-                    if (list.contains(item)){
-                        list.remove(item);
+
+
+                    if (houses.get(jump) == 0) {
+                        System.out.printf("Place %d already had Valentine's day.\n", jump);
+                        break;
                     }
-                    break;
-                case "Correct":
-                    String newItem = tokens[2];
-                    if (list.contains(item)){
-                        list.set(list.indexOf(item), newItem);
+
+                    houses.set(jump, houses.get(jump) - 2);
+
+                    if (houses.get(jump) == 0) {
+                        count++;
+                        System.out.printf("Place %d has Valentine's day.\n", jump);
+                        break;
                     }
-                    break;
-                case "Rearrange":
-                    if (list.contains(item)) {
-                        int index = list.indexOf(item);
-                        list.remove(item);
-                        list.add(item);
-                    }
-                    break;
+
+
             }
-            commands = scanner.nextLine();
+            command = scanner.nextLine();
         }
-        System.out.println(String.join(", ", list));
+
+        if (houses.size() != count) {
+            System.out.printf("Cupid's last position was %d.\n", jump);
+            System.out.printf("Cupid has failed %d places.", houses.size() - count);
+        } else {
+            System.out.printf("Cupid's last position was %d.\n", jump);
+            System.out.println("Mission was successful.");
+        }
+
     }
 
     }
