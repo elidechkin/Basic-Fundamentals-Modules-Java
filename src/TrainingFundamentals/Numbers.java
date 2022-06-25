@@ -1,46 +1,48 @@
 package TrainingFundamentals;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Numbers {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int[] arrNum = Arrays.stream(scanner.nextLine().split(" "))
-                .mapToInt(Integer::parseInt)
-                .toArray();
+        List<Integer> numList = Arrays.stream(scanner.nextLine().split(" "))
+                .map(Integer::parseInt).sorted(Collections.reverseOrder())
+                .collect(Collectors.toList());
 
-        int sumAllArrNum = 0;
-        int averigeArray = 0;
-        for (int i = 0; i < arrNum.length ; i++) {
-            int currentNum = arrNum[i];
-            sumAllArrNum += currentNum;
+        int sumAllNum = 0;
+
+        for (Integer currentNum : numList) {
+            sumAllNum += currentNum;
+
         }
-        averigeArray = sumAllArrNum / arrNum.length;
 
-        int countNumMaxAv = 0;
+        double averageValue = sumAllNum * 1.00 / numList.size();
 
-        for (int current:arrNum) {
-            if (current > averigeArray){
-              countNumMaxAv ++;
-              if (countNumMaxAv > 5){
-                  break;
-              }
+        List<Integer> finalNumList = new ArrayList<>();
 
-                System.out.print(current + " ");
+        for (Integer currentNumber : numList) {
+            if (currentNumber > averageValue) {
+                finalNumList.add(currentNumber);
             }
+        }
 
-
-                System.out.println("No");
-
-
+        if (finalNumList.isEmpty()) {
+            System.out.println("No");
+        } else if (finalNumList.size() < 5) {
+            for (Integer number : finalNumList) {
+                System.out.printf("%d ", number);
             }
+        } else {
+            finalNumList = finalNumList.stream().limit(5).collect(Collectors.toList());
 
+            for (Integer number : finalNumList) {
+                System.out.printf("%d ", number);
+            }
+        }
         }
 
     }
 
 
-//if (current < averigeArray){
-//                System.out.println("No");
