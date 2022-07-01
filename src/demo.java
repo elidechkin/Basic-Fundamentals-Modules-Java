@@ -8,52 +8,64 @@ public class demo {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        List<Integer> houses = Arrays.stream(scanner.nextLine().split("@")).
-                map(Integer::parseInt).collect(Collectors.toList());
-
+        String input =  scanner.nextLine();
+        List<String> myList =Arrays.stream(input.split("\\&"))
+                .collect(Collectors.toList());
         String command = scanner.nextLine();
 
-        int jump = 0;
-        int count = 0;
-        while (!command.equals("Love!")) {
-            String[] operations = command.split(" ");
-
-            switch (operations[0]) {
-                case "Jump":
-                    int len = Integer.parseInt(operations[1]);
-                    jump += len;
-
-                    if (jump >= houses.size()) {
-                        jump = 0;
-
+        while(!command.equals("Done")){
+            String[] commandArr = command.split("\\s\\|\\s");
+            switch (commandArr[0]){
+                case"Add Book":{
+                    String bookName = commandArr[1];
+                    int index = myList.indexOf(bookName);
+                    if(index==-1){
+                        myList.add(0, bookName);
                     }
-
-
-                    if (houses.get(jump) == 0) {
-                        System.out.printf("Place %d already had Valentine's day.\n", jump);
-                        break;
+                };
+                break;
+                case"Take Book":{
+                    String bookName = commandArr[1];
+                    int index = myList.indexOf(bookName);
+                    if(index!=-1){
+                        myList.remove(index);
                     }
-
-                    houses.set(jump, houses.get(jump) - 2);
-
-                    if (houses.get(jump) == 0) {
-                        count++;
-                        System.out.printf("Place %d has Valentine's day.\n", jump);
-                        break;
+                };
+                break;
+                case"Swap Books":{
+                    String bookName1 = commandArr[1];
+                    String bookName2 = commandArr[2];
+                    int index1 = myList.indexOf(bookName1);
+                    int index2 = myList.indexOf(bookName2);
+                    if(index1!=-1 && index2 !=-1){
+                        String help = myList.get(index1);
+                        myList.set(index1,bookName2);
+                        myList.set(index2,help);
                     }
-
-
+                };
+                break;
+                case"Insert Book":{
+                    String bookName = commandArr[1];
+                    int index = myList.indexOf(bookName);
+                    if(index==-1){
+                        myList.add(bookName);
+                    }
+                };
+                break;
+                case"Check Book":{
+                    int index = Integer.parseInt(commandArr[1]);
+                    if(index >-1 && index<myList.size()){
+                        System.out.println(myList.get(index));
+                    }
+                };
+                break;
             }
             command = scanner.nextLine();
         }
-
-        if (houses.size() != count) {
-            System.out.printf("Cupid's last position was %d.\n", jump);
-            System.out.printf("Cupid has failed %d places.", houses.size() - count);
-        } else {
-            System.out.printf("Cupid's last position was %d.\n", jump);
-            System.out.println("Mission was successful.");
+        for (int i = 0;i < myList.size()-1;i++){
+            System.out.print(myList.get(i)+", ");
         }
+        System.out.print(myList.get(myList.size()-1));
 
     }
 
