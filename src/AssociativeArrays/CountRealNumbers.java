@@ -1,8 +1,9 @@
+package AssociativeArrays;
+
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-public class demo {
+public class CountRealNumbers {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -27,10 +28,8 @@ public class demo {
 //            }
         }
 
-        for (Map.Entry<Double, Integer> entry : countNumbersMap.entrySet()) {
+        for (Map.Entry<Double, Integer> entry : countNumbersMap.entrySet()) {//
             System.out.printf("%.0f -> %d%n", entry.getKey(), entry.getValue());
         }
     }
-
-    }
-
+}
