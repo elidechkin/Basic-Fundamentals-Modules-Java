@@ -21,8 +21,8 @@ public class CountRealNumbers {
 
 
 //            Integer currentValue = countNumbersMap.get(currentNum); тук с голям Инт, защото променливата няма ст=ст
-//            if (countNumbersMap.containsKey(currentNum)) { проверка дали го има ключа в мапа
-//                countNumbersMap.put(currentNum, currentValue + 1); добавяме го към мапа
+//            if (countNumbersMap.containsKey(currentNum)) { проверка дали го има ключа в мапа и ако е го има
+//                countNumbersMap.put(currentNum, currentValue + 1); добавяме само ст-тта към мапа
 //            } else {
 //                countNumbersMap.put(currentNum, 1);ако го няма, добавяме го
 //            }

@@ -1,11 +1,11 @@
 package AssociativeArrays;
 
-
 import java.util.*;
 
-public class treta {
+public class OddOccurrences {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
         String[] lineInput = scanner.nextLine().split(" ");
 
         Map<String, Integer> wordsCountMap = new LinkedHashMap<>();
