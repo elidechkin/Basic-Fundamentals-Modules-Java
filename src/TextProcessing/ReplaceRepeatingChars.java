@@ -6,16 +6,22 @@ public class ReplaceRepeatingChars {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String text = scanner.nextLine();
-        StringBuilder encryptedText = new StringBuilder();
+        String input = scanner.nextLine();
 
-        for (int position = 0; position <= text.length() - 1 ; position++) {
-            char symbol = text.charAt(position);// вземаме всеки чар на текущата позиция
-            char encriptedSymbol = (char) (symbol + 3);
+        String res = "";
 
-            encryptedText.append(encriptedSymbol);
+        char firstOccur = input.charAt(0);
+        res += firstOccur;
+
+        for (int i = 1; i < input.length(); i++) {//обхождаме редицата
+            char currentSymbol = input.charAt(i); //вземаме всеки символ
+            if (currentSymbol != firstOccur) {// ако символа е различен, г
+                res += currentSymbol;//го добавяме към празния стринг
+                firstOccur = currentSymbol;
+            }
 
         }
-        System.out.println(encryptedText);
+
+        System.out.println(res);
     }
 }
